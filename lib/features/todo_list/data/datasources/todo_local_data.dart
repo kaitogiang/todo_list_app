@@ -5,8 +5,8 @@ import 'package:todo/core/utils/app_constants.dart';
 import 'package:todo/features/todo_list/data/models/todo_model.dart';
 
 @LazySingleton()
-class TodoLocalDataSource {
-  const TodoLocalDataSource(this._todoBox);
+class TodoLocalData {
+  const TodoLocalData(this._todoBox);
 
   final CollectionBox<List<Map<String, dynamic>>> _todoBox;
 
