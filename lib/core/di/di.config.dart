@@ -26,6 +26,8 @@ import 'package:todo/features/todo_list/domain/usecases/get_todos_use_case.dart'
     as _i403;
 import 'package:todo/features/todo_list/domain/usecases/update_todo_use_case.dart'
     as _i225;
+import 'package:todo/features/todo_list/presentation/bloc/todo_bloc.dart'
+    as _i890;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -53,6 +55,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i225.UpdateTodoUseCase>(
       () => _i225.UpdateTodoUseCase(gh<_i24.TodoRepository>()),
+    );
+    gh.lazySingleton<_i890.TodoBloc>(
+      () => _i890.TodoBloc(
+        gh<_i767.AddTodoUseCase>(),
+        gh<_i324.DeleteTodoUseCase>(),
+        gh<_i403.GetTodosUseCase>(),
+        gh<_i225.UpdateTodoUseCase>(),
+      ),
     );
     return this;
   }

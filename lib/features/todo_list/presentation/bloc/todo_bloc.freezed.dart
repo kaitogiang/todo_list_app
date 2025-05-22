@@ -45,7 +45,7 @@ mixin _$TodoEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_TodoEvent value) $default, {
-    required TResult Function(_TodoRetrieving value) todoRetrieved,
+    required TResult Function(_TodoRetrieved value) todoRetrieved,
     required TResult Function(_TodoAdded value) todoAdded,
     required TResult Function(_TodoUpdated value) todoUpdated,
     required TResult Function(_TodoDeleted value) todoDeleted,
@@ -53,7 +53,7 @@ mixin _$TodoEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_TodoEvent value)? $default, {
-    TResult? Function(_TodoRetrieving value)? todoRetrieved,
+    TResult? Function(_TodoRetrieved value)? todoRetrieved,
     TResult? Function(_TodoAdded value)? todoAdded,
     TResult? Function(_TodoUpdated value)? todoUpdated,
     TResult? Function(_TodoDeleted value)? todoDeleted,
@@ -61,7 +61,7 @@ mixin _$TodoEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_TodoEvent value)? $default, {
-    TResult Function(_TodoRetrieving value)? todoRetrieved,
+    TResult Function(_TodoRetrieved value)? todoRetrieved,
     TResult Function(_TodoAdded value)? todoAdded,
     TResult Function(_TodoUpdated value)? todoUpdated,
     TResult Function(_TodoDeleted value)? todoDeleted,
@@ -173,7 +173,7 @@ class _$TodoEventImpl implements _TodoEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_TodoEvent value) $default, {
-    required TResult Function(_TodoRetrieving value) todoRetrieved,
+    required TResult Function(_TodoRetrieved value) todoRetrieved,
     required TResult Function(_TodoAdded value) todoAdded,
     required TResult Function(_TodoUpdated value) todoUpdated,
     required TResult Function(_TodoDeleted value) todoDeleted,
@@ -185,7 +185,7 @@ class _$TodoEventImpl implements _TodoEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_TodoEvent value)? $default, {
-    TResult? Function(_TodoRetrieving value)? todoRetrieved,
+    TResult? Function(_TodoRetrieved value)? todoRetrieved,
     TResult? Function(_TodoAdded value)? todoAdded,
     TResult? Function(_TodoUpdated value)? todoUpdated,
     TResult? Function(_TodoDeleted value)? todoDeleted,
@@ -197,7 +197,7 @@ class _$TodoEventImpl implements _TodoEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_TodoEvent value)? $default, {
-    TResult Function(_TodoRetrieving value)? todoRetrieved,
+    TResult Function(_TodoRetrieved value)? todoRetrieved,
     TResult Function(_TodoAdded value)? todoAdded,
     TResult Function(_TodoUpdated value)? todoUpdated,
     TResult Function(_TodoDeleted value)? todoDeleted,
@@ -215,20 +215,20 @@ abstract class _TodoEvent implements TodoEvent {
 }
 
 /// @nodoc
-abstract class _$$TodoRetrievingImplCopyWith<$Res> {
-  factory _$$TodoRetrievingImplCopyWith(
-    _$TodoRetrievingImpl value,
-    $Res Function(_$TodoRetrievingImpl) then,
-  ) = __$$TodoRetrievingImplCopyWithImpl<$Res>;
+abstract class _$$TodoRetrievedImplCopyWith<$Res> {
+  factory _$$TodoRetrievedImplCopyWith(
+    _$TodoRetrievedImpl value,
+    $Res Function(_$TodoRetrievedImpl) then,
+  ) = __$$TodoRetrievedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TodoRetrievingImplCopyWithImpl<$Res>
-    extends _$TodoEventCopyWithImpl<$Res, _$TodoRetrievingImpl>
-    implements _$$TodoRetrievingImplCopyWith<$Res> {
-  __$$TodoRetrievingImplCopyWithImpl(
-    _$TodoRetrievingImpl _value,
-    $Res Function(_$TodoRetrievingImpl) _then,
+class __$$TodoRetrievedImplCopyWithImpl<$Res>
+    extends _$TodoEventCopyWithImpl<$Res, _$TodoRetrievedImpl>
+    implements _$$TodoRetrievedImplCopyWith<$Res> {
+  __$$TodoRetrievedImplCopyWithImpl(
+    _$TodoRetrievedImpl _value,
+    $Res Function(_$TodoRetrievedImpl) _then,
   ) : super(_value, _then);
 
   /// Create a copy of TodoEvent
@@ -237,8 +237,8 @@ class __$$TodoRetrievingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TodoRetrievingImpl implements _TodoRetrieving {
-  const _$TodoRetrievingImpl();
+class _$TodoRetrievedImpl implements _TodoRetrieved {
+  const _$TodoRetrievedImpl();
 
   @override
   String toString() {
@@ -248,7 +248,7 @@ class _$TodoRetrievingImpl implements _TodoRetrieving {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TodoRetrievingImpl);
+        (other.runtimeType == runtimeType && other is _$TodoRetrievedImpl);
   }
 
   @override
@@ -298,7 +298,7 @@ class _$TodoRetrievingImpl implements _TodoRetrieving {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_TodoEvent value) $default, {
-    required TResult Function(_TodoRetrieving value) todoRetrieved,
+    required TResult Function(_TodoRetrieved value) todoRetrieved,
     required TResult Function(_TodoAdded value) todoAdded,
     required TResult Function(_TodoUpdated value) todoUpdated,
     required TResult Function(_TodoDeleted value) todoDeleted,
@@ -310,7 +310,7 @@ class _$TodoRetrievingImpl implements _TodoRetrieving {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_TodoEvent value)? $default, {
-    TResult? Function(_TodoRetrieving value)? todoRetrieved,
+    TResult? Function(_TodoRetrieved value)? todoRetrieved,
     TResult? Function(_TodoAdded value)? todoAdded,
     TResult? Function(_TodoUpdated value)? todoUpdated,
     TResult? Function(_TodoDeleted value)? todoDeleted,
@@ -322,7 +322,7 @@ class _$TodoRetrievingImpl implements _TodoRetrieving {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_TodoEvent value)? $default, {
-    TResult Function(_TodoRetrieving value)? todoRetrieved,
+    TResult Function(_TodoRetrieved value)? todoRetrieved,
     TResult Function(_TodoAdded value)? todoAdded,
     TResult Function(_TodoUpdated value)? todoUpdated,
     TResult Function(_TodoDeleted value)? todoDeleted,
@@ -335,8 +335,8 @@ class _$TodoRetrievingImpl implements _TodoRetrieving {
   }
 }
 
-abstract class _TodoRetrieving implements TodoEvent {
-  const factory _TodoRetrieving() = _$TodoRetrievingImpl;
+abstract class _TodoRetrieved implements TodoEvent {
+  const factory _TodoRetrieved() = _$TodoRetrievedImpl;
 }
 
 /// @nodoc
@@ -462,7 +462,7 @@ class _$TodoAddedImpl implements _TodoAdded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_TodoEvent value) $default, {
-    required TResult Function(_TodoRetrieving value) todoRetrieved,
+    required TResult Function(_TodoRetrieved value) todoRetrieved,
     required TResult Function(_TodoAdded value) todoAdded,
     required TResult Function(_TodoUpdated value) todoUpdated,
     required TResult Function(_TodoDeleted value) todoDeleted,
@@ -474,7 +474,7 @@ class _$TodoAddedImpl implements _TodoAdded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_TodoEvent value)? $default, {
-    TResult? Function(_TodoRetrieving value)? todoRetrieved,
+    TResult? Function(_TodoRetrieved value)? todoRetrieved,
     TResult? Function(_TodoAdded value)? todoAdded,
     TResult? Function(_TodoUpdated value)? todoUpdated,
     TResult? Function(_TodoDeleted value)? todoDeleted,
@@ -486,7 +486,7 @@ class _$TodoAddedImpl implements _TodoAdded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_TodoEvent value)? $default, {
-    TResult Function(_TodoRetrieving value)? todoRetrieved,
+    TResult Function(_TodoRetrieved value)? todoRetrieved,
     TResult Function(_TodoAdded value)? todoAdded,
     TResult Function(_TodoUpdated value)? todoUpdated,
     TResult Function(_TodoDeleted value)? todoDeleted,
@@ -634,7 +634,7 @@ class _$TodoUpdatedImpl implements _TodoUpdated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_TodoEvent value) $default, {
-    required TResult Function(_TodoRetrieving value) todoRetrieved,
+    required TResult Function(_TodoRetrieved value) todoRetrieved,
     required TResult Function(_TodoAdded value) todoAdded,
     required TResult Function(_TodoUpdated value) todoUpdated,
     required TResult Function(_TodoDeleted value) todoDeleted,
@@ -646,7 +646,7 @@ class _$TodoUpdatedImpl implements _TodoUpdated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_TodoEvent value)? $default, {
-    TResult? Function(_TodoRetrieving value)? todoRetrieved,
+    TResult? Function(_TodoRetrieved value)? todoRetrieved,
     TResult? Function(_TodoAdded value)? todoAdded,
     TResult? Function(_TodoUpdated value)? todoUpdated,
     TResult? Function(_TodoDeleted value)? todoDeleted,
@@ -658,7 +658,7 @@ class _$TodoUpdatedImpl implements _TodoUpdated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_TodoEvent value)? $default, {
-    TResult Function(_TodoRetrieving value)? todoRetrieved,
+    TResult Function(_TodoRetrieved value)? todoRetrieved,
     TResult Function(_TodoAdded value)? todoAdded,
     TResult Function(_TodoUpdated value)? todoUpdated,
     TResult Function(_TodoDeleted value)? todoDeleted,
@@ -794,7 +794,7 @@ class _$TodoDeletedImpl implements _TodoDeleted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_TodoEvent value) $default, {
-    required TResult Function(_TodoRetrieving value) todoRetrieved,
+    required TResult Function(_TodoRetrieved value) todoRetrieved,
     required TResult Function(_TodoAdded value) todoAdded,
     required TResult Function(_TodoUpdated value) todoUpdated,
     required TResult Function(_TodoDeleted value) todoDeleted,
@@ -806,7 +806,7 @@ class _$TodoDeletedImpl implements _TodoDeleted {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_TodoEvent value)? $default, {
-    TResult? Function(_TodoRetrieving value)? todoRetrieved,
+    TResult? Function(_TodoRetrieved value)? todoRetrieved,
     TResult? Function(_TodoAdded value)? todoAdded,
     TResult? Function(_TodoUpdated value)? todoUpdated,
     TResult? Function(_TodoDeleted value)? todoDeleted,
@@ -818,7 +818,7 @@ class _$TodoDeletedImpl implements _TodoDeleted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_TodoEvent value)? $default, {
-    TResult Function(_TodoRetrieving value)? todoRetrieved,
+    TResult Function(_TodoRetrieved value)? todoRetrieved,
     TResult Function(_TodoAdded value)? todoAdded,
     TResult Function(_TodoUpdated value)? todoUpdated,
     TResult Function(_TodoDeleted value)? todoDeleted,
