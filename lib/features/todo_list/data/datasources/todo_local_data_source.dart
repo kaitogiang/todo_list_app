@@ -10,10 +10,14 @@ class TodoLocalDataSource {
 
   final CollectionBox<List<Map<String, dynamic>>> _todoBox;
 
-  ///Get the todo list from local database
-  Future<List<TodoModel>> getTodos() async {
+  Future<List<TodoModel>> _getTodoList() async {
     final todos = await _todoBox.get(AppConstants.userTodosKey);
     return todos?.map((todo) => TodoModel.fromJson(todo)).toList() ?? [];
+  }
+
+  ///Get the todo list from local database
+  Future<List<TodoModel>> getTodos() async {
+    return await _getTodoList();
   }
 
   ///Add new todo to the local database
@@ -24,7 +28,11 @@ class TodoLocalDataSource {
     return todo;
   }
 
-
-
-  
+  ///Update an existing todo in the local database
+  Future<TodoModel> updateTodo(TodoModel todo) async {
+    final currentTodoModelList = await _getTodoList();
+    final updatedTodoIndex = currentTodoModelList.indexOf(todo);
+    currentTodoModelList[updatedTodoIndex] = todo;
+    return todo;
+  }
 }

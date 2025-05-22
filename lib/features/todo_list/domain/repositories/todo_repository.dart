@@ -16,7 +16,7 @@ abstract class TodoRepository {
 
   ///Method for updating a task
 
-  FutureOr<TodoEntity> updateTodo(TodoEntity todo);
+  FutureOr<TodoEntity?> updateTodo(TodoEntity todo);
 
   ///Method for deleting a task
 
