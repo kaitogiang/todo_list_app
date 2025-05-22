@@ -20,6 +20,6 @@ class TodoModel with _$TodoModel {
     DateTime? dueDate,
   }) = _TodoModel;
 
-  factory TodoModel.fromJson(Map<String, Object?> json) =>
+  factory TodoModel.fromJson(Map<String, dynamic> json) =>
       _$TodoModelFromJson(json);
 }

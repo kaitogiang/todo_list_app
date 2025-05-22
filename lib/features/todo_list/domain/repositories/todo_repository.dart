@@ -12,7 +12,7 @@ abstract class TodoRepository {
   FutureOr<List<TodoEntity>> getTodos();
 
   ///Method for adding a new task
-  FutureOr<TodoEntity> addTodo();
+  FutureOr<TodoEntity> addTodo(TodoEntity todo);
 
   ///Method for updating a task
 
