@@ -20,5 +20,5 @@ abstract class TodoRepository {
 
   ///Method for deleting a task
 
-  FutureOr<bool> deleteTodo();
+  FutureOr<bool> deleteTodo(String id);
 }
