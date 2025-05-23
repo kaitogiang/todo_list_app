@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
     this.isSecondary = false,
     this.width,
     this.height,
+    this.isEnabled = true,
   });
 
   final String title;
@@ -22,26 +23,37 @@ class CustomButton extends StatelessWidget {
 
   final double? height;
 
+  final bool isEnabled;
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: BorderSide(
-            color: isSecondary ? AppColors.grey : AppColors.primaryColor,
-          ),
+          side:
+              isEnabled
+                  ? BorderSide(
+                    color:
+                        isSecondary ? AppColors.grey : AppColors.primaryColor,
+                  )
+                  : BorderSide.none,
         ),
+        disabledBackgroundColor: AppColors.grey2,
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-        // fixedSize: Size(width ?? double.infinity, height ?? 40),
         fixedSize: Size.fromHeight(height ?? 40),
         backgroundColor: isSecondary ? null : AppColors.primaryColor,
       ),
-      onPressed: onPressed,
+      onPressed: isEnabled ? onPressed : null,
       child: Text(
         title,
         style: AppTextStyle.textSize18(
-          color: isSecondary ? AppColors.grey : AppColors.white,
+          color:
+              !isEnabled
+                  ? AppColors.grey
+                  : isSecondary
+                  ? AppColors.grey
+                  : AppColors.white,
         ),
       ),
     );

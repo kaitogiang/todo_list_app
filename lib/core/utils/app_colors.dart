@@ -8,4 +8,5 @@ class AppColors {
   static Color successfulColor = Color(0xFF6EB79C);
   static Color errorColor = Color(0xFFF04C28);
   static Color yellowColor = Color(0xFFFEB066);
+  static Color grey2 = Colors.grey.shade600;
 }

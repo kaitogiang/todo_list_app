@@ -80,6 +80,7 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
                 Expanded(
                   child: CustomButton(
                     title: 'Save',
+                    isEnabled: true,
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
