@@ -28,7 +28,13 @@ class Helpers {
     required BuildContext context,
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(title), duration: Duration(seconds: 2)),
+      SnackBar(
+        content: Text(title),
+        duration: Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        showCloseIcon: true,
+        margin: const EdgeInsets.symmetric(horizontal: 200),
+      ),
     );
   }
 
