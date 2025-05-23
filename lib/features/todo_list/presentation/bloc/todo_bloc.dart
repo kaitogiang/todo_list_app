@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/features/todo_list/domain/usecases/add_todo_use_case.dart';
@@ -35,7 +36,25 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   FutureOr<void> _onTodoRetrieved(
     _TodoRetrieved event,
     Emitter<TodoState> emit,
-  ) async {}
+  ) async {
+    try {
+      emit(state.copyWith(
+        getTodoLoading: true,
+      ));
+
+      final todos = await _getTodosUseCase.execute();
+
+      emit(state.copyWith(
+        getTodoLoading: false,
+        todos: todos,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        getTodoLoading: false,
+      ));
+      Logger().e(e);
+    }
+  }
 
   FutureOr<void> _onTodoAdded(
     _TodoAdded event,
