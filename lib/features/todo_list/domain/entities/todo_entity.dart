@@ -6,7 +6,13 @@ part 'todo_entity.freezed.dart';
 
 part 'todo_entity.g.dart';
 
-enum TodoStatus { pending, completed }
+enum TodoStatus {
+  pending('pending'),
+  completed('completed');
+
+  final String value;
+  const TodoStatus(this.value);
+}
 
 @freezed
 class TodoEntity with _$TodoEntity {

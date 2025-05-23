@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:todo/core/utils/app_colors.dart';
 import 'package:todo/core/utils/app_text_style.dart';
@@ -230,5 +231,10 @@ class Helpers {
         );
       },
     );
+  }
+
+  static String formatDate(DateTime date, [String pattern = 'dd/MM/yyyy']) {
+    final formatted = DateFormat(pattern).format(date);
+    return formatted;
   }
 }

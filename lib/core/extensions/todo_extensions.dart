@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/core/utils/app_colors.dart';
 import 'package:todo/features/todo_list/data/models/todo_model.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 
@@ -11,6 +12,22 @@ extension TodoModelConverter on TodoModel {
 extension TodoEntityConverter on TodoEntity {
   TodoModel get asTodoModel {
     return TodoModel(id: id, title: title, status: status, dueDate: dueDate);
+  }
+}
+
+extension TodoStatusX on TodoStatus {
+  Color get color {
+    return switch (this) {
+      TodoStatus.pending => AppColors.yellowColor,
+      TodoStatus.completed => AppColors.successfulColor,
+    };
+  }
+
+  Color get textColor {
+    return switch (this) {
+      TodoStatus.pending => AppColors.black,
+      TodoStatus.completed => AppColors.white,
+    };
   }
 }
 
