@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:todo/core/utils/app_colors.dart';
 import 'package:todo/core/utils/app_text_style.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
@@ -24,6 +25,17 @@ class Helpers {
         }).toList();
 
     return updatedList;
+  }
+
+  static Future<DateTime?> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+
+    Logger().e('Selected date is: $picked');
+    return picked;
   }
 
   static void showToastBottom({
