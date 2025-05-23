@@ -14,6 +14,8 @@ class AppTextStyle {
     );
   }
 
+  
+
   static TextStyle textSize18({
     Color? color = Colors.black,
     FontWeight fontWeight = FontWeight.w400,

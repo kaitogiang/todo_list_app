@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:todo/core/utils/app_text_style.dart';
 import 'package:todo/core/extensions/todo_extensions.dart';
+import 'package:todo/core/utils/helpers.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 import 'package:todo/features/todo_list/presentation/widgets/custom_button.dart';
+import 'package:todo/features/todo_list/presentation/widgets/todo_addition_form.dart';
 import 'package:todo/features/todo_list/presentation/widgets/todo_item.dart';
 
 class TodoPage extends StatelessWidget {
@@ -27,7 +29,18 @@ class TodoPage extends StatelessWidget {
                   'Tasks',
                   style: AppTextStyle.textSize30(fontWeight: FontWeight.bold),
                 ),
-                CustomButton(title: 'Add Task', onPressed: () {}),
+                CustomButton(
+                  title: 'Add Task',
+                  onPressed: () {
+                    Helpers.showCustomDialog(
+                      context: context,
+                      verticalPadding: 100,
+                      title: 'Add todo',
+                      onPrimaryPressed: () {},
+                      customWidget: TodoAdditionForm(),
+                    );
+                  },
+                ),
               ],
             ),
             10.0.h,
