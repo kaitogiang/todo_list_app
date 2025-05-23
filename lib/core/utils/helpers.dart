@@ -49,22 +49,29 @@ class Helpers {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(
             horizontal: context.widthScreen * 0.3,
-            vertical: context.hightScreen * 0.2,
+            vertical: context.hightScreen * 0.3,
           ),
           child: Stack(
             children: [
-              Column(
-                children: [
-                  5.0.h,
-                  Text(
-                    title,
-                    style: AppTextStyle.textSize30(fontWeight: FontWeight.bold),
-                  ),
-                  if (content != null) 10.0.h,
-                  if (content != null) Text(content),
-                  10.0.h,
-                  Expanded(
-                    child: Row(
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 10,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      title,
+                      style: AppTextStyle.textSize30(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (content != null) 10.0.h,
+                    if (content != null)
+                      Text(content, style: AppTextStyle.textSize18()),
+                    10.0.h,
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -86,9 +93,8 @@ class Helpers {
                         ),
                       ],
                     ),
-                  ),
-                  20.0.h,
-                ],
+                  ],
+                ),
               ),
               Positioned(
                 top: 5,
