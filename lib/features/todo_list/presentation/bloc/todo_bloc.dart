@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:todo/core/utils/helpers.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/features/todo_list/domain/usecases/add_todo_use_case.dart';
@@ -65,7 +66,20 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   FutureOr<void> _onTodoUpdated(
     _TodoUpdated event,
     Emitter<TodoState> emit,
-  ) async {}
+  ) async {
+    try {
+      emit(state.copyWith(updateTodoLoading: true));
+
+      final originTodos = [...state.todos];
+      final updatedTodo = await _updateTodoUseCase.execute(event.todo);
+      final newTodos = Helpers.findAndReplaceItem(updatedTodo, originTodos);
+
+      emit(state.copyWith(updateTodoLoading: false, todos: newTodos));
+    } catch (e) {
+      emit(state.copyWith(updateTodoLoading: false));
+      Logger().e(e);
+    }
+  }
 
   FutureOr<void> _onTodoDeleted(
     _TodoDeleted event,
