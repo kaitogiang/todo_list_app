@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_overlay/loading_overlay.dart';
-import 'package:logger/logger.dart';
-import 'package:todo/core/utils/app_colors.dart';
 import 'package:todo/core/utils/app_text_style.dart';
 import 'package:todo/core/extensions/todo_extensions.dart';
 import 'package:todo/core/utils/helpers.dart';
