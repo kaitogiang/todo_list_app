@@ -1,95 +1,126 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import 'package:logger/logger.dart';
+import 'package:todo/core/utils/app_colors.dart';
 import 'package:todo/core/utils/app_text_style.dart';
 import 'package:todo/core/extensions/todo_extensions.dart';
 import 'package:todo/core/utils/helpers.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
+import 'package:todo/features/todo_list/presentation/bloc/todo_bloc.dart';
 import 'package:todo/features/todo_list/presentation/widgets/custom_button.dart';
 import 'package:todo/features/todo_list/presentation/widgets/todo_addition_form.dart';
 import 'package:todo/features/todo_list/presentation/widgets/todo_item.dart';
 
-class TodoPage extends StatelessWidget {
+class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
+
+  @override
+  State<TodoPage> createState() => _TodoPageState();
+}
+
+class _TodoPageState extends State<TodoPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<TodoBloc>().add(TodoEvent.todoRetrieved());
+  }
+
+  bool _isLoading(TodoState state) {
+    return state.addTodoLoading ||
+        state.updateTodoLoading ||
+        state.deleteTodoLoading ||
+        state.getTodoLoading;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.widthScreen * 0.12,
-          vertical: 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Tasks',
-                  style: AppTextStyle.textSize30(fontWeight: FontWeight.bold),
-                ),
-                CustomButton(
-                  title: 'Add Task',
-                  onPressed: () {
-                    Helpers.showCustomDialog(
-                      context: context,
-                      verticalPadding: 100,
-                      title: 'Add todo',
-                      onPrimaryPressed: () {},
-                      customWidget: TodoAdditionForm(),
-                    );
-                  },
-                ),
-              ],
-            ),
-            10.0.h,
-            Expanded(
-              child: ListView(
+      body: BlocBuilder<TodoBloc, TodoState>(
+        builder: (context, state) {
+          return LoadingOverlay(
+            isLoading: _isLoading(state),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.widthScreen * 0.12,
+                vertical: 20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TodoItem(
-                    todo: TodoEntity(
-                      id: 'id',
-                      title:
-                          'title ajslfdjalk sjlfajslkd jlfaksjdl fajsld kfajsldk jlaskjd lfak jsldkfjaslkd fkajlfdsk asfdasldjf lkajslfjalsd jlfasjdl fajls djkf',
-                      status: TodoStatus.pending,
-                      dueDate: DateTime.now(),
-                    ),
-                    onDelete: () {
-                      Logger().i('Delete');
-                    },
-                    onEdit: () {
-                      Logger().i('Edit');
-                    },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Tasks',
+                        style: AppTextStyle.textSize30(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      CustomButton(
+                        title: 'Add Task',
+                        onPressed: () {
+                          Helpers.showCustomDialog(
+                            context: context,
+                            verticalPadding: 100,
+                            title: 'Add todo',
+                            onPrimaryPressed: () {},
+                            customWidget: TodoAdditionForm(),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  TodoItem(
-                    todo: TodoEntity(
-                      id: 'id',
-                      title:
-                          'title ajslfdjalk sjlfajslkd jlfaksjdl fajsld kfajsldk jlaskjd lfak jsldkfjaslkd fkajlfdsk asfdasldjf lkajslfjalsd jlfasjdl fajls djkf',
-                      status: TodoStatus.completed,
-                      dueDate: DateTime.now(),
+                  10.0.h,
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        TodoItem(
+                          todo: TodoEntity(
+                            id: 'id',
+                            title:
+                                'title ajslfdjalk sjlfajslkd jlfaksjdl fajsld kfajsldk jlaskjd lfak jsldkfjaslkd fkajlfdsk asfdasldjf lkajslfjalsd jlfasjdl fajls djkf',
+                            status: TodoStatus.pending,
+                            dueDate: DateTime.now(),
+                          ),
+                          onDelete: () {
+                            Logger().i('Delete');
+                          },
+                          onEdit: () {
+                            Logger().i('Edit');
+                          },
+                        ),
+                        TodoItem(
+                          todo: TodoEntity(
+                            id: 'id',
+                            title:
+                                'title ajslfdjalk sjlfajslkd jlfaksjdl fajsld kfajsldk jlaskjd lfak jsldkfjaslkd fkajlfdsk asfdasldjf lkajslfjalsd jlfasjdl fajls djkf',
+                            status: TodoStatus.completed,
+                            dueDate: DateTime.now(),
+                          ),
+                          onDelete: () {
+                            Logger().i('Delete');
+                          },
+                          onEdit: () {
+                            Logger().i('Edit');
+                          },
+                        ),
+                      ],
                     ),
-                    onDelete: () {
-                      Logger().i('Delete');
-                    },
-                    onEdit: () {
-                      Logger().i('Edit');
-                    },
                   ),
+                  Text(
+                    'Completed',
+                    style: AppTextStyle.textSize30(fontWeight: FontWeight.bold),
+                  ),
+                  Expanded(child: ListView(children: [
+                        
+                      ],
+                    )),
                 ],
               ),
             ),
-            Text(
-              'Completed',
-              style: AppTextStyle.textSize30(fontWeight: FontWeight.bold),
-            ),
-            Expanded(child: ListView(children: [
-                  
-                ],
-              )),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

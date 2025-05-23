@@ -44,7 +44,8 @@ class Helpers {
     required BuildContext context,
     ToastType tostType = ToastType.success,
   }) {
-    ScaffoldMessenger.of(context).showSnackBar(
+    final rootContext = Navigator.of(context, rootNavigator: true).context;
+    ScaffoldMessenger.of(rootContext).showSnackBar(
       SnackBar(
         content: Text(title),
         duration: Duration(seconds: 2),

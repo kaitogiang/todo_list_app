@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:todo/core/extensions/todo_extensions.dart';
 import 'package:todo/core/utils/app_text_style.dart';
 import 'package:todo/core/utils/helpers.dart';
@@ -19,12 +18,54 @@ class TodoAdditionForm extends StatefulWidget {
 class _TodoAdditionFormState extends State<TodoAdditionForm> {
   final _titleController = TextEditingController();
   final _dateController = TextEditingController();
+  DateTime? _selectedDate;
   TodoStatus? _selectedStatus = TodoStatus.pending;
+  late TodoEntity? _localTodo;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.todo != null) {
+      _localTodo = widget.todo!.copyWith();
+      _titleController.text = _localTodo?.title ?? '';
+      if (_localTodo?.dueDate != null) {
+        _dateController.text = Helpers.formatDate(_localTodo!.dueDate!);
+      }
+      _selectedStatus = _localTodo!.status;
+    } else {
+      _localTodo = TodoEntity(
+        id: DateTime.now().toIso8601String(),
+        title: '',
+        status: TodoStatus.pending,
+      );
+    }
+  }
 
   @override
   void dispose() {
     _titleController.dispose();
     super.dispose();
+  }
+
+  void _submit() async {
+    if (_titleController.text.trim().isEmpty) {
+      Helpers.showToastBottom(
+        title: 'The title cannot be empty',
+        context: context,
+        tostType: ToastType.error,
+      );
+
+      return;
+    }
+
+    _localTodo = _localTodo!.copyWith(
+      title: _titleController.text.trim(),
+      status: _selectedStatus ?? TodoStatus.pending,
+      dueDate: _selectedDate,
+    );
+
+    //TODO call method in bloc
+    Navigator.of(context).pop();
   }
 
   @override
@@ -37,8 +78,8 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
           controller: _dateController,
           hintText: 'Due date',
           readOnly: true,
-          onTap: () {
-            Helpers.selectDate(context);
+          onTap: () async {
+            _selectedDate = await Helpers.selectDate(context);
           },
           suffixIcon: Icon(Icons.access_time),
         ),
@@ -81,9 +122,7 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
                   child: CustomButton(
                     title: 'Save',
                     isEnabled: true,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: () => _submit(),
                   ),
                 ),
               ],
