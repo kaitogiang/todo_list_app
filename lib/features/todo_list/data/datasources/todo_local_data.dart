@@ -58,7 +58,11 @@ class TodoLocalData {
     if (existingTodo == null) return false;
 
     currentTodoModelList.removeWhere((todo) => todo.id == id);
-    await _todoBox.put(AppConstants.userTodosKey, currentTodoModelList);
-    return false;
+    final currentTodoMapList =
+        currentTodoModelList.map((todo) {
+          return todo.toJson();
+        }).toList();
+    await _todoBox.put(AppConstants.userTodosKey, currentTodoMapList);
+    return true;
   }
 }

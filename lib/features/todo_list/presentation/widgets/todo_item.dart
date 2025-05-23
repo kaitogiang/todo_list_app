@@ -26,7 +26,7 @@ class TodoItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(child: Text(todo.title, style: AppTextStyle.textSize18())),
-            5.0.w,  
+            5.0.w,
             _buildTodoStatus(todo.status),
             if (todo.dueDate != null) 10.0.w,
             if (todo.dueDate != null) _buildDueDate(todo.dueDate!),
@@ -43,7 +43,7 @@ class TodoItem extends StatelessWidget {
       children: [
         IconButton(onPressed: onEdit, icon: Icon(Icons.edit)),
         10.0.w,
-        IconButton(onPressed: onEdit, icon: Icon(Icons.delete)),
+        IconButton(onPressed: onDelete, icon: Icon(Icons.delete)),
       ],
     );
   }
@@ -72,12 +72,5 @@ class TodoItem extends StatelessWidget {
         style: AppTextStyle.textSize12(color: status.textColor),
       ),
     );
-    // return InputChip(
-    //   color: WidgetStatePropertyAll(status.color),
-    //   label: Text(
-    //     status.value,
-    //     style: AppTextStyle.textSize12(color: status.textColor),
-    //   ),
-    // );
   }
 }

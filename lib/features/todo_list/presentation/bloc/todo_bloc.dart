@@ -93,7 +93,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         originTodos.removeWhere((todo) {
           return todo.id == event.id;
         });
-        //TODO show success dialog
+        emit(state.copyWith(deleteTodoLoading: false, todos: originTodos));
         return;
       }
 

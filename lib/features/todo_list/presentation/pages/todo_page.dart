@@ -45,7 +45,15 @@ class _TodoPageState extends State<TodoPage> {
       return TodoItem(
         todo: todo,
         onDelete: () {
-          _todoBloc.add(TodoEvent.todoDeleted(todo.id));
+          Helpers.showConfirmDialog(
+            context: context,
+            title: 'Confirm Deletion',
+            content:
+                'Are you sure you want to delete this task? This action cannot be undone ',
+            onPrimaryPressed: () {
+              _todoBloc.add(TodoEvent.todoDeleted(todo.id));
+            },
+          );
         },
         onEdit: () {
           Helpers.showCustomDialog(
