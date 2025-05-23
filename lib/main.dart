@@ -135,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Helpers.showToastBottom(
             title: 'Add new item successfully',
             context: context,
+            tostType: ToastType.error,
           );
         },
         tooltip: 'Increment',

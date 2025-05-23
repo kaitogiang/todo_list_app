@@ -4,4 +4,6 @@ class AppColors {
   static Color grey = Colors.grey;
   static Color primaryColor = const Color(0xFFFF6817);
   static Color white = Colors.white;
+  static Color successfulColor = Color(0xFF6EB79C);
+  static Color errorColor = Color(0xFFF04C28);
 }

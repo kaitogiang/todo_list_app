@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:todo/core/utils/app_colors.dart';
 import 'package:todo/core/utils/app_text_style.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 import 'package:todo/core/extensions/todo_extensions.dart';
 import 'package:todo/features/todo_list/presentation/widgets/custom_button.dart';
+
+enum ToastType { success, error }
 
 class Helpers {
   static List<TodoEntity> findAndReplaceItem<T>(
@@ -26,6 +29,7 @@ class Helpers {
   static void showToastBottom({
     required String title,
     required BuildContext context,
+    ToastType tostType = ToastType.success,
   }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -34,6 +38,10 @@ class Helpers {
         behavior: SnackBarBehavior.floating,
         showCloseIcon: true,
         margin: const EdgeInsets.symmetric(horizontal: 200),
+        backgroundColor:
+            tostType == ToastType.success
+                ? AppColors.successfulColor
+                : AppColors.errorColor,
       ),
     );
   }
