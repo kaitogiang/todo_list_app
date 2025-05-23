@@ -9,6 +9,7 @@ import 'package:todo/core/utils/helpers.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 import 'package:todo/features/todo_list/presentation/bloc/todo_bloc.dart';
 import 'package:todo/features/todo_list/presentation/widgets/custom_button.dart';
+import 'package:todo/features/todo_list/presentation/widgets/empty_custom.dart';
 import 'package:todo/features/todo_list/presentation/widgets/todo_addition_form.dart';
 import 'package:todo/features/todo_list/presentation/widgets/todo_item.dart';
 
@@ -20,10 +21,12 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
+  late Bloc _todoBloc;
   @override
   void initState() {
     super.initState();
-    context.read<TodoBloc>().add(TodoEvent.todoRetrieved());
+    _todoBloc = context.read<TodoBloc>();
+    _todoBloc.add(TodoEvent.todoRetrieved());
   }
 
   bool _isLoading(TodoState state) {
@@ -31,6 +34,24 @@ class _TodoPageState extends State<TodoPage> {
         state.updateTodoLoading ||
         state.deleteTodoLoading ||
         state.getTodoLoading;
+  }
+
+  List<TodoItem> _filterTodoListByStatus(
+    List<TodoEntity> todos, {
+    TodoStatus status = TodoStatus.pending,
+  }) {
+    final filterTodos = todos.where((todo) => todo.status == status).toList();
+    return filterTodos.map((todo) {
+      return TodoItem(
+        todo: todo,
+        onDelete: () {
+          _todoBloc.add(TodoEvent.todoDeleted(todo.id));
+        },
+        onEdit: () {
+          _todoBloc.add(TodoEvent.todoUpdated(todo));
+        },
+      );
+    }).toList();
   }
 
   @override
@@ -73,49 +94,35 @@ class _TodoPageState extends State<TodoPage> {
                   ),
                   10.0.h,
                   Expanded(
-                    child: ListView(
-                      children: [
-                        TodoItem(
-                          todo: TodoEntity(
-                            id: 'id',
-                            title:
-                                'title ajslfdjalk sjlfajslkd jlfaksjdl fajsld kfajsldk jlaskjd lfak jsldkfjaslkd fkajlfdsk asfdasldjf lkajslfjalsd jlfasjdl fajls djkf',
-                            status: TodoStatus.pending,
-                            dueDate: DateTime.now(),
-                          ),
-                          onDelete: () {
-                            Logger().i('Delete');
-                          },
-                          onEdit: () {
-                            Logger().i('Edit');
-                          },
-                        ),
-                        TodoItem(
-                          todo: TodoEntity(
-                            id: 'id',
-                            title:
-                                'title ajslfdjalk sjlfajslkd jlfaksjdl fajsld kfajsldk jlaskjd lfak jsldkfjaslkd fkajlfdsk asfdasldjf lkajslfjalsd jlfasjdl fajls djkf',
-                            status: TodoStatus.completed,
-                            dueDate: DateTime.now(),
-                          ),
-                          onDelete: () {
-                            Logger().i('Delete');
-                          },
-                          onEdit: () {
-                            Logger().i('Edit');
-                          },
-                        ),
-                      ],
+                    child: Builder(
+                      builder: (context) {
+                        final todos = _filterTodoListByStatus(state.todos);
+                        if (todos.isEmpty) {
+                          return EmptyCustom(title: 'No task found');
+                        }
+
+                        return ListView(children: todos);
+                      },
                     ),
                   ),
                   Text(
                     'Completed',
                     style: AppTextStyle.textSize30(fontWeight: FontWeight.bold),
                   ),
-                  Expanded(child: ListView(children: [
-                        
-                      ],
-                    )),
+                  Expanded(
+                    child: Builder(
+                      builder: (context) {
+                        final todos = _filterTodoListByStatus(
+                          state.todos,
+                          status: TodoStatus.completed,
+                        );
+                        if (todos.isEmpty) {
+                          return EmptyCustom(title: 'No completed task found');
+                        }
+                        return ListView(children: todos);
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
