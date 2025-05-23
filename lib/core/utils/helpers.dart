@@ -89,21 +89,25 @@ class Helpers {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        CustomButton(
-                          title: labelPrimaryButton ?? 'Cancel',
-                          isSecondary: true,
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            onSecondaryPressed?.call();
-                          },
+                        Expanded(
+                          child: CustomButton(
+                            title: labelPrimaryButton ?? 'Cancel',
+                            isSecondary: true,
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              onSecondaryPressed?.call();
+                            },
+                          ),
                         ),
                         20.0.w,
-                        CustomButton(
-                          title: labelPrimaryButton ?? 'Ok',
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            onPrimaryPressed.call();
-                          },
+                        Expanded(
+                          child: CustomButton(
+                            title: labelPrimaryButton ?? 'Ok',
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              onPrimaryPressed.call();
+                            },
+                          ),
                         ),
                       ],
                     ),

@@ -123,20 +123,20 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Helpers.showConfirmDialog(
-          //   context: context,
-          //   title: 'Confirm delete',
-          //   content:
-          //       'Are you sure you want to delete this item? This action cannot be undone',
-          //   onPrimaryPressed: () {
-          //     Logger().i('Delete item');
-          //   },
-          // );
-          Helpers.showToastBottom(
-            title: 'Add new item successfully',
+          Helpers.showConfirmDialog(
             context: context,
-            tostType: ToastType.error,
+            title: 'Confirm delete',
+            content:
+                'Are you sure you want to delete this item? This action cannot be undone',
+            onPrimaryPressed: () {
+              Logger().i('Delete item');
+            },
           );
+          // Helpers.showToastBottom(
+          //   title: 'Add new item successfully',
+          //   context: context,
+          //   tostType: ToastType.error,
+          // );
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
