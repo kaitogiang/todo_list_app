@@ -65,8 +65,6 @@ class Helpers {
     required Widget customWidget,
     String? title,
     bool barrierDismissible = true,
-    String? labelPrimaryButton,
-    String? labelSecondaryButton,
     Function()? onSecondaryPressed,
     bool isShowSecondaryButton = false,
     double? horizontalPadding,
@@ -99,33 +97,6 @@ class Helpers {
                         ),
                       ),
                     Expanded(child: customWidget),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        if (isShowSecondaryButton)
-                          Expanded(
-                            child: CustomButton(
-                              title: labelPrimaryButton ?? 'Cancel',
-                              isSecondary: true,
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                onSecondaryPressed?.call();
-                              },
-                            ),
-                          ),
-                        if (isShowSecondaryButton) 20.0.w,
-                        Expanded(
-                          child: CustomButton(
-                            title: labelPrimaryButton ?? 'Ok',
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              onPrimaryPressed.call();
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
