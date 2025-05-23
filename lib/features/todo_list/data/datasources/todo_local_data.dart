@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:hive/hive.dart';
+import 'package:logger/logger.dart';
 import 'package:todo/core/utils/app_constants.dart';
 import 'package:todo/features/todo_list/data/models/todo_model.dart';
 
@@ -8,11 +9,16 @@ import 'package:todo/features/todo_list/data/models/todo_model.dart';
 class TodoLocalData {
   const TodoLocalData(this._todoBox);
 
-  final CollectionBox<List<Map<String, dynamic>>> _todoBox;
+  final CollectionBox<List<dynamic>> _todoBox;
 
   Future<List<TodoModel>> _getTodoList() async {
     final todos = await _todoBox.get(AppConstants.userTodosKey);
-    return todos?.map((todo) => TodoModel.fromJson(todo)).toList() ?? [];
+    final todoMapList =
+        todos?.map((item) {
+          return Map<String, dynamic>.from(item);
+        }).toList();
+    Logger().i(todos);
+    return todoMapList?.map((todo) => TodoModel.fromJson(todo)).toList() ?? [];
   }
 
   ///Get the todo list from local database

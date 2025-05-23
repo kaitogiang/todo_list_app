@@ -85,7 +85,6 @@ class _TodoPageState extends State<TodoPage> {
                             context: context,
                             verticalPadding: 100,
                             title: 'Add todo',
-                            onPrimaryPressed: () {},
                             customWidget: TodoAdditionForm(),
                           );
                         },

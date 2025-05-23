@@ -37,9 +37,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.lazySingleton<_i659.TodoLocalData>(
-      () => _i659.TodoLocalData(
-        gh<_i979.CollectionBox<List<Map<String, dynamic>>>>(),
-      ),
+      () => _i659.TodoLocalData(gh<_i979.CollectionBox<List<dynamic>>>()),
     );
     gh.lazySingleton<_i24.TodoRepository>(
       () => _i1017.TodoRepositoryIml(gh<_i659.TodoLocalData>()),

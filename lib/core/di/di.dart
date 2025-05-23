@@ -16,9 +16,8 @@ Future<void> configureInjection() async {
     AppConstants.userTodosKey,
   }, path: dir.path);
 
-  final CollectionBox<List<Map<String, dynamic>>> todoBox = await collection
-      .openBox(AppConstants.userTodosKey);
-  getIt.registerSingleton<CollectionBox<List<Map<String, dynamic>>>>(todoBox);
+  final todoBox = await collection.openBox<List>(AppConstants.userTodosKey);
+  getIt.registerSingleton<CollectionBox<List<dynamic>>>(todoBox);
 
   getIt.init();
 }

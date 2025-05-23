@@ -62,7 +62,6 @@ class Helpers {
 
   static void showCustomDialog({
     required BuildContext context,
-    required Function() onPrimaryPressed,
     required Widget customWidget,
     String? title,
     bool barrierDismissible = true,
@@ -74,7 +73,7 @@ class Helpers {
     showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
-      builder: (context) {
+      builder: (_) {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(
             horizontal: horizontalPadding ?? context.widthScreen * 0.3,
