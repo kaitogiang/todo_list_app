@@ -66,7 +66,15 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
       status: _selectedStatus ?? TodoStatus.pending,
       dueDate: _selectedDate,
     );
-    _todoBloc.add(TodoEvent.todoAdded(_localTodo!));
+
+    //Add operation
+    if (widget.todo == null) {
+      _todoBloc.add(TodoEvent.todoAdded(_localTodo!));
+    } else {
+      //Update operation
+      _todoBloc.add(TodoEvent.todoUpdated(_localTodo!));
+    }
+
     Navigator.of(context).pop();
   }
 

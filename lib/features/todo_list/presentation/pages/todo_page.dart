@@ -48,7 +48,12 @@ class _TodoPageState extends State<TodoPage> {
           _todoBloc.add(TodoEvent.todoDeleted(todo.id));
         },
         onEdit: () {
-          _todoBloc.add(TodoEvent.todoUpdated(todo));
+          Helpers.showCustomDialog(
+            context: context,
+            verticalPadding: 100,
+            title: 'Add todo',
+            customWidget: TodoAdditionForm(todo: todo),
+          );
         },
       );
     }).toList();

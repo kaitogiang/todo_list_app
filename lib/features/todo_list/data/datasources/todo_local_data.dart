@@ -37,8 +37,15 @@ class TodoLocalData {
   ///Update an existing todo in the local database
   Future<TodoModel> updateTodo(TodoModel todo) async {
     final currentTodoModelList = await _getTodoList();
-    final updatedTodoIndex = currentTodoModelList.indexOf(todo);
+    final updatedTodoIndex = currentTodoModelList.indexWhere(
+      (td) => td.id == todo.id,
+    );
     currentTodoModelList[updatedTodoIndex] = todo;
+    final currentTodoMapList =
+        currentTodoModelList.map((todo) {
+          return todo.toJson();
+        }).toList();
+    await _todoBox.put(AppConstants.userTodosKey, currentTodoMapList);
     return todo;
   }
 
@@ -51,6 +58,7 @@ class TodoLocalData {
     if (existingTodo == null) return false;
 
     currentTodoModelList.removeWhere((todo) => todo.id == id);
+    await _todoBox.put(AppConstants.userTodosKey, currentTodoModelList);
     return false;
   }
 }
