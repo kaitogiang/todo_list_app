@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:logger/logger.dart';
+import 'package:todo/core/utils/helpers.dart';
 import 'core/di/di.dart';
 
 void main() async {
@@ -120,7 +122,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Helpers.showConfirmDialog(
+            context: context,
+            title: 'Confirm delete',
+            onPrimaryPressed: () {
+              Logger().i('Delete item');
+            },
+          );
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

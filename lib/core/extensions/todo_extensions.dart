@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:todo/features/todo_list/data/models/todo_model.dart';
 import 'package:todo/features/todo_list/domain/entities/todo_entity.dart';
 
@@ -24,4 +25,14 @@ extension ListConverter on List<TodoModel> {
       ),
     ).toList();
   }
+}
+
+extension ContextX on BuildContext {
+  double get widthScreen => MediaQuery.of(this).size.width;
+  double get hightScreen => MediaQuery.of(this).size.height;
+}
+
+extension IntX on double {
+  SizedBox get h => SizedBox(height: this);
+  SizedBox get w => SizedBox(width: this);
 }

@@ -84,5 +84,23 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   FutureOr<void> _onTodoDeleted(
     _TodoDeleted event,
     Emitter<TodoState> emit,
-  ) async {}
+  ) async {
+    try {
+      emit(state.copyWith(deleteTodoLoading: true));
+      final originTodos = [...state.todos];
+      final isDeleted = await _deleteTodoUseCase.execute(event.id);
+      if (isDeleted) {
+        originTodos.removeWhere((todo) {
+          return todo.id == event.id;
+        });
+        //TODO show success dialog
+        return;
+      }
+
+      emit(state.copyWith(deleteTodoLoading: false));
+    } catch (e) {
+      emit(state.copyWith(deleteTodoLoading: false));
+      Logger().e(e);
+    }
+  }
 }
