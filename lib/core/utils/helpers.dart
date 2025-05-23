@@ -46,6 +46,94 @@ class Helpers {
     );
   }
 
+  static void showCustomDialog({
+    required BuildContext context,
+    required Function() onPrimaryPressed,
+    required Widget customWidget,
+    String? title,
+    bool barrierDismissible = true,
+    String? labelPrimaryButton,
+    String? labelSecondaryButton,
+    Function()? onSecondaryPressed,
+    bool isShowSecondaryButton = false,
+    double? horizontalPadding,
+    double? verticalPadding,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (context) {
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(
+            horizontal: horizontalPadding ?? context.widthScreen * 0.3,
+            vertical: verticalPadding ?? context.hightScreen * 0.3,
+          ),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                  vertical: 10,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (title != null)
+                      Text(
+                        title,
+                        style: AppTextStyle.textSize30(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    Expanded(child: customWidget),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        if (isShowSecondaryButton)
+                          Expanded(
+                            child: CustomButton(
+                              title: labelPrimaryButton ?? 'Cancel',
+                              isSecondary: true,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                onSecondaryPressed?.call();
+                              },
+                            ),
+                          ),
+                        if (isShowSecondaryButton) 20.0.w,
+                        Expanded(
+                          child: CustomButton(
+                            title: labelPrimaryButton ?? 'Ok',
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              onPrimaryPressed.call();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 5,
+                right: 10,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(Icons.close),
+                  iconSize: 30,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   static void showConfirmDialog({
     required BuildContext context,
     required String title,
