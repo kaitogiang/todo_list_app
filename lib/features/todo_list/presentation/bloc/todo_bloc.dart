@@ -38,28 +38,29 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     Emitter<TodoState> emit,
   ) async {
     try {
-      emit(state.copyWith(
-        getTodoLoading: true,
-      ));
+      emit(state.copyWith(getTodoLoading: true));
 
       final todos = await _getTodosUseCase.execute();
 
-      emit(state.copyWith(
-        getTodoLoading: false,
-        todos: todos,
-      ));
+      emit(state.copyWith(getTodoLoading: false, todos: todos));
     } catch (e) {
-      emit(state.copyWith(
-        getTodoLoading: false,
-      ));
+      emit(state.copyWith(getTodoLoading: false));
       Logger().e(e);
     }
   }
 
-  FutureOr<void> _onTodoAdded(
-    _TodoAdded event,
-    Emitter<TodoState> emit,
-  ) async {}
+  FutureOr<void> _onTodoAdded(_TodoAdded event, Emitter<TodoState> emit) async {
+    try {
+      emit(state.copyWith(addTodoLoading: true));
+      final todos = [...state.todos];
+      final addedTodo = await _addTodoUseCase.execute(event.todo);
+      todos.add(addedTodo);
+      emit(state.copyWith(addTodoLoading: false, todos: todos));
+    } catch (e) {
+      emit(state.copyWith(addTodoLoading: false));
+      Logger().e(e);
+    }
+  }
 
   FutureOr<void> _onTodoUpdated(
     _TodoUpdated event,
