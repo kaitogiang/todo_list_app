@@ -47,6 +47,7 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
   @override
   void dispose() {
     _titleController.dispose();
+    _dateController.dispose();
     super.dispose();
   }
 
