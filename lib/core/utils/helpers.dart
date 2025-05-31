@@ -28,11 +28,12 @@ class Helpers {
     return updatedList;
   }
 
-  static Future<DateTime?> selectDate(BuildContext context) async {
+  static Future<DateTime?> selectDate(BuildContext context, {DateTime? currentDate}) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
+      currentDate: currentDate,
     );
 
     Logger().e('Selected date is: $picked');
