@@ -97,14 +97,16 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
           hintText: 'Due date',
           readOnly: true,
           onTap: () async {
-            _selectedDate = await Helpers.selectDate(
-              context,
-              currentDate: _selectedDate,
-            );
+            _selectedDate =
+                await Helpers.selectDate(context, currentDate: _selectedDate) ??
+                _selectedDate;
             if (_selectedDate != null) {
               _dateController.text = Helpers.formatDate(_selectedDate!);
             } else {
-              _dateController.text = '';
+              _dateController.text =
+                  _selectedDate != null
+                      ? Helpers.formatDate(_selectedDate!)
+                      : '';
             }
           },
           suffixIcon: Icon(Icons.access_time),
