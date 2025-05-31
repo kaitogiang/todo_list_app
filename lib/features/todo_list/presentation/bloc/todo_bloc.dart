@@ -69,7 +69,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   ) async {
     try {
       emit(state.copyWith(updateTodoLoading: true));
-
       final originTodos = [...state.todos];
       final updatedTodo = await _updateTodoUseCase.execute(event.todo);
       final newTodos = Helpers.findAndReplaceItem(updatedTodo, originTodos);

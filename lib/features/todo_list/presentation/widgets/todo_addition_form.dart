@@ -29,10 +29,17 @@ class _TodoAdditionFormState extends State<TodoAdditionForm> {
     super.initState();
     _todoBloc = context.read<TodoBloc>();
     if (widget.todo != null) {
-      _localTodo = widget.todo!.copyWith();
+      print('Todo in form: ${widget.todo?.dueDate}');
+      _localTodo = TodoEntity(
+        id: widget.todo!.id,
+        title: widget.todo!.title,
+        status: widget.todo!.status,
+        dueDate: widget.todo?.dueDate,
+      );
       _titleController.text = _localTodo?.title ?? '';
       if (_localTodo?.dueDate != null) {
         _dateController.text = Helpers.formatDate(_localTodo!.dueDate!);
+        _selectedDate = _localTodo!.dueDate!;
       }
       _selectedStatus = _localTodo!.status;
     } else {
